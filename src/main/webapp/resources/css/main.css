@@ -1,0 +1,307 @@
+/* �꽕鍮꾨컮 �깋�긽 #00BFFE */
+
+	
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+h3 {
+    /* font-family: 'Cafe24SsurroundAir' !important; */
+    font-family: "Nanum Pen Script", cursive;
+}
+
+.moveTopBtn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 4rem;
+  height: 4rem;
+  width:50px; 
+  height:50px;
+ }
+
+#outer_wrap {
+	
+}
+footer {
+	margin-top:100px;
+}
+#wrap {
+	display:flex; 
+	justify-content:center;
+	align-items:center;
+	margin-top: 60px;
+}
+a {
+	text-decoration:none; 
+	color:black;
+}
+tr {
+	vertical-align:middle;
+}
+.title_underline {
+	height: 40px;
+	border-bottom: 2px solid black;
+	margin-bottom: 20px;
+}
+
+/* �옄�룞 �셿�꽦 由ъ뒪�듃 */
+#search-box{
+	display: none;
+	position: absolute; 
+	left: 1590px; 
+	top: 75px; 
+	border: 0.1px solid black; 
+	z-index: ; 
+	background-color: white;
+}
+
+/* �뿤�뜑 */
+.nav-link {
+	font-size: 16px; 
+	font-weight: bold;
+	color:white;
+}
+.link {
+	width: 188px; height: 230px; display: block; position: absolute; z-index: 2;
+}
+
+.nav-item {
+	margin:0 10px 0 10px;
+}
+#navbar-nav-2 {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:100px;
+}
+
+/* 硫붿씤 */
+.main_goods {
+	display:flex;
+	align-items:center;
+	flex-wrap: wrap;
+	width:1100px;
+}
+.goods {
+	margin:10px 10px 20px 10px;
+}
+/* .goods>a>img {
+	background-color:#F1F3F5;
+	border-radius:10px;
+}
+.goods>a>img:hover {
+	background-color:lightgrey;
+	border-radius:10px;
+} */
+.title,
+.price {
+	text-align:center;
+}
+.main_goods_div {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.main-title {
+	font-weight:bold;
+	width:1100px;
+	border-bottom: 2px solid black;
+}
+.main-title-div {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	margin: 50px 0 -50px 0;
+	height:200px;
+}
+.main_btn_div {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin-top:10px;
+	margin-bottom:-100px;
+}
+#main_btn_menu {
+	width:200px;
+	height:50px;
+	margin: 10px;
+	text-align:center;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	/* background-color: #FDBA69; */
+}
+#main_btn_menu:hover {
+	background-color: white;
+}
+.line-image {
+	margin-top:50px;
+}
+
+/*  */
+.carousel-item {
+	height:900px !important;
+	
+}
+/*  */
+
+/* 濡쒓렇�씤 */
+.login_div {
+	text-align:center;
+	margin-top: 60px;
+}
+
+/* �쉶�썝媛��엯 */
+.signup_div {
+	text-align:center;
+	margin-top:60px;
+}
+
+/* �긽�뭹 �긽�꽭 �젙蹂� */
+.goods-title {
+	margin-top:50px;
+}
+.container {
+	text-align:center; 
+	min-width:100%;
+}
+.tab_container {
+	margin-top:50px;
+}
+#goods_detail_menu {
+	list-style:none;
+}
+#goods_detail_menu>li {
+	float:left; 
+	padding: 20px; 
+	width:230px; 
+	margin: 10px 10px 20px 10px;
+	text-align:center;
+	background-color:#FDBA69;
+	border-radius:10px;
+	margin-bottom:50px;
+	
+}
+#goods_detail_menu>li:hover {
+	background-color:#FDBA69;
+	border-radius:10px;
+}
+.col-md-5>img {
+	width:420px; 
+	height:420px; 
+}
+
+/* 怨듭��궗�빆 */
+.notice-div {
+	width:1000px;
+	margin-top: 50px;
+}
+.paging-div {
+	width:1000px; 
+	text-align:center;
+}
+
+/* 愿�由ъ옄 �긽�뭹 議고쉶 */
+#admin-search-btn {
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
+}
+.order-main-title {
+	margin-top: 50px;
+	
+}
+.add-goods-form {
+	margin-bottom: -100px;
+}
+
+/* �옣諛붽뎄�땲 */
+.cart-title {
+	margin-top: 50px;
+}
+.cart-list-div {
+	min-width: 680px;
+}
+
+/* 留덉씠�럹�씠吏� */
+.mypage-title {
+	margin-top: 50px;
+}
+.mypage-div {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 40px;
+	border-radius:20px;
+	margin-bottom: -50px;	
+}
+.myinfo-div {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 40px;
+	border-radius:20px;
+	margin-bottom: 10px;
+}
+
+/* 愿�由ъ옄 �긽�뭹 異붽� */
+#tab7 {
+	margin-bottom: 50px;
+}
+
+/* �썑湲� �쟾泥� */
+.review-div {
+	width:1000px;
+	margin-top: 50px;
+}
+.paging-div {
+	margin-bottom: -50px;
+}
+
+/* Q&A �쟾泥� */
+.qna-div {
+	width: 1000px;
+	margin-top: 50px;
+}
+
+/* 愿�由ъ옄 二쇰Ц 硫붿씤 */
+.admin_ordermain_title {
+	margin-top: 50px;
+}
+
+/* 愿�由ъ옄 �쉶�썝 議고쉶 */
+.admin_member_title {
+	margin-top: 50px;
+}
+
+/* 二쇰Ц �솕硫� */
+#order-div {
+	margin-top: 50px;
+}
+
+/* 寃��깋 寃곌낵 */
+.search-div {
+	margin-top: 50px;
+}
+
+/* 二쇰Ц 諛곗넚 議고쉶 */
+#order-history-title {
+	margin-top: 50px;
+}
+
+/* �궡 �긽�꽭 �젙蹂� */
+#detail-info-title {
+	margin-top: 50px;
+}
+#info-cancel-btn {
+	margin-bottom: -150px;
+}
+
+/* 二쇰Ц 寃곌낵 */
+#order-result-title {
+	margin-top: 50px;
+}
+
+
+
