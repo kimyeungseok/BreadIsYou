@@ -30,6 +30,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	
 	
+	
 	@Override
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
 //		int groupNO = selectNewGroupNO();

@@ -8,23 +8,23 @@
 	<resultMap id="goodsResult" type="goodsVO">
 		<result property="goods_id" column="goods_id" />
 		<result property="goods_title" column="goods_title" />
-		<result property="goods_writer" column="goods_writer" />
+		
 		<result property="goods_price" column="goods_price" />
 		<result property="goods_publisher" column="goods_publisher" />
 		
 		<result property="goods_status" column="goods_status" />
 		<result property="goods_sales_price" column="goods_sales_price" />
 		<result property="goods_published_date" column="goods_published_date" />
-		<result property="goods_total_page" column="goods_total_page" />
-		<result property="goods_isbn" column="goods_isbn" />
+		
+		
 		<result property="goods_delivery_price" column="goods_delivery_price" />
 		<result property="goods_delivery_date" column="goods_delivery_date" />
 		
 		<result property="goods_fileName" column="fileName" />
 		<result property="goods_sort" column="goods_sort" />
-		<result property="goods_writer_intro" column="goods_writer_intro" />
+		
 		<result property="goods_intro" column="goods_intro" />
-		<result property="goods_contents_order" column="goods_contents_order" javaType="java.lang.String" jdbcType="CLOB"  />
+		
 	</resultMap>	
 
 	<resultMap id="imageResult" type="ImageFileVO">
@@ -80,27 +80,24 @@
 		                goods_id, 
 		                goods_sort,
                     goods_title,
-                    goods_writer,
+                    
                     goods_publisher,
 										goods_price,
 										goods_sales_price,
 										goods_point,
 										goods_published_date,
-										goods_total_page,
-										goods_isbn,
+										
+										
 										goods_delivery_price,
 										goods_delivery_date,
 										goods_status,
-										goods_writer_intro,
-										goods_intro,
-										goods_publisher_comment,
-										goods_recommendation,
-			              goods_contents_order)
+										
+										goods_intro)
 					  			values(
 					  			      #{goods_id},
 					  			      #{goods_sort},
 					  			      #{goods_title},
-					  			      #{goods_writer},
+					  			      
 					  			     
 					  			      #{goods_publisher },
 					  			      #{goods_price},
@@ -108,17 +105,13 @@
 					  			      #{goods_point},
 					  			      #{goods_published_date},
 					  			      
-					  			      #{goods_total_page},
-					  			      #{goods_isbn },
+					  			     
 					  			      #{goods_delivery_price },
 					  			      #{goods_delivery_date },
 					  			      #{goods_status },
-					  			      #{goods_writer_intro},
+					  			      
 											
-									      #{goods_intro},
-					  			      #{goods_publisher_comment },
-					  			      #{goods_recommendation },	
-					  			      #{goods_contents_order:VARCHAR}
+									      #{goods_intro}
 					 			 )
 		]]>
 	</insert> 
@@ -145,7 +138,7 @@
 			   select rowNum as recNum,
 			   		  goods_id,
 			          goods_title,
-			          goods_writer,
+			          
 			          goods_publisher,
 			          goods_sales_price,
 			          to_char(goods_creDate,'YYYY-MM-DD')  as goods_creDate,
@@ -153,7 +146,7 @@
 			       from (
 			             select  goods_id,
 			             		 goods_title,
-			             		 goods_writer,
+			             		 
 			             		 goods_publisher,
 			             		 goods_sales_price,
 			             		 goods_creDate,
@@ -221,9 +214,7 @@
 	      <if test=" goods_title!='' and goods_title!=null">
 	        goods_title=#{goods_title},
 	      </if>
-	      <if test=" goods_writer!='' and goods_writer!=null">
-	        goods_writer=#{goods_writer},
-	      </if>
+	      
 	      <if test=" goods_publisher!='' and goods_publisher!=null">
 	        goods_publisher=#{goods_publisher},
 	      </if>
@@ -239,12 +230,7 @@
 	      <if test=" goods_point!='' and goods_point!=null">
 	        goods_point=#{goods_point},
 	      </if>
-	      <if test=" goods_page_total!='' and goods_page_total!=null">
-	        goods_page_total=#{goods_page_total},
-	      </if>
-	      <if test=" goods_isbn!='' and goods_isbn!=null">
-	        goods_isbn=#{goods_isbn},
-	      </if>
+	      
 	      <if test=" goods_delivery_price!='' and goods_delivery_price!=null">
 	        goods_delivery_price=#{goods_delivery_price},
 	      </if>
@@ -254,21 +240,11 @@
 	      <if test=" goods_status!='' and goods_status!=null">
 	        goods_status=#{goods_status},
 	      </if>
-	      <if test=" goods_writer_intro!='' and goods_writer_intro!=null">
-	        goods_writer_intro=#{goods_writer_intro},
-	      </if>
+	      
 	      <if test=" goods_intro!='' and goods_intro!=null">
 	        goods_intro=#{goods_intro},
 	      </if>
-	      <if test=" publisher_comment!='' and publisher_comment!=null">
-	        publisher_comment=#{publisher_comment},
-	      </if>
-	      <if test=" recommendation!='' and recommendation!=null">
-	        recommendation=#{recommendation},
-	      </if>
-	      <if test=" goods_contents_order!='' and goods_contents_order!=null">
-	        goods_contents_order=#{goods_contents_order:VARCHAR}
-	      </if>
+	     
 	     </set>
 	    where 
 	    goods_id=#{goods_id}
@@ -284,6 +260,11 @@
 	<delete id="deleteGoodsImage" parameterType="String">
 	  delete from t_goods_detail_image
 	  where image_id=#{image_id}
+	</delete>
+	
+	<delete id="deleteGoods" parameterType="String">
+	  delete from t_shopping_goods
+	  where goods_id=#{goods_id}
 	</delete>
 	
 <update id="updateOrderGoods" parameterType="java.util.HashMap" >

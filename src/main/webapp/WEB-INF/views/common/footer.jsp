@@ -26,19 +26,44 @@
 
         <div class="col-md-4 col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold mb-4">
-            제품
+            메뉴 
           </h6>
+          
           <p>
-            <a href="#!" class="text-reset">빵</a>
+           <a href="#total">
+			<div class="btn" id="main_btn_menu">
+			<font color = "black" >
+				전체제품
+				</font>
+			</div>
+		</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">케이크</a>
+            <a href="#best">
+			<div class="btn" id="main_btn_menu">
+			<font color = "black" >
+				인기제품
+				</font>
+			</div>
+		</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">디저트</a>
+           <a href="#new">
+			<div class="btn" id="main_btn_menu">
+			<font color = "black" >
+				신제품
+				</font>
+			</div>
+		</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">잼</a>
+           <a href="#discount">
+			<div class="btn" id="main_btn_menu">
+			<font color = "black" >
+				사장님 추천 제품
+				</font>
+			</div>
+		</a>
           </p>
         </div>
 
@@ -72,7 +97,7 @@
 			"mapHeight" : "200"
 			}).render();
 		  </script>
-          <p>대전광역시 서구 계룡로 637 정일빌딩 3층</p>
+          <p>대전 서구 계룡로 637 정일빌딩 3층 Bread Is You</p>
           <p>+82 123 456 78</p>
           <p>+82 234 567 89</p>
         </div>
@@ -81,7 +106,7 @@
   </section>
  
  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-	   <p class="footer_p">Copyright 2023. 매일<br>
+	   <p class="footer_p">Copyright 2024. Bread Is You<br>
 		All rights reserved.</p>
   </div>
 </footer>

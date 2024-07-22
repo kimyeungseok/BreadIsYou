@@ -29,6 +29,12 @@ public class AdminMemberDAOImpl  implements AdminMemberDAO{
 	public void modifyMemberInfo(HashMap memberMap) throws DataAccessException{
 		sqlSession.update("mapper.admin.member.modifyMemberInfo",memberMap);
 	}
+
+	
+	//멤버 삭제
+	public void deleteMember(String member_id) throws DataAccessException {
+		sqlSession.delete("mapper.admin.member.deleteMember",member_id);
+	}
 	
 	
 

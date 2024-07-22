@@ -294,6 +294,9 @@ function fn_show_order_detail(){
 	total_order_goods_price=h_final_total_Price.value;
 	total_order_goods_qty=h_total_order_goods_qty.value;
 	
+	
+	
+	
 	var r_pay_method  =  frm.pay_method;
 	
 	for(var i=0; i<r_pay_method.length;i++){
@@ -403,6 +406,7 @@ function fn_process_pay_order(){
     
     var i_delivery_address=document.createElement("input");
     var i_delivery_message=document.createElement("input");
+    var i_delivery_method=document.createElement("input");
     var i_pay_method=document.createElement("input");
     var i_card_com_name=document.createElement("input");
     var i_card_pay_month=document.createElement("input");
@@ -419,6 +423,7 @@ function fn_process_pay_order(){
    
     i_delivery_address.name="delivery_address";
     i_delivery_message.name="delivery_message";
+    i_delivery_method.name="delivery_method";
     i_pay_method.name="pay_method";
     i_card_com_name.name="card_com_name";
     i_card_pay_month.name="card_pay_month";
@@ -435,6 +440,7 @@ function fn_process_pay_order(){
     ;
     i_delivery_address.value=delivery_address;
     i_delivery_message.value=delivery_message;
+    i_delivery_method.value=delivery_method;
     i_pay_method.value=pay_method;
     i_card_com_name.value=card_com_name;
     i_card_pay_month.value=card_pay_month;
@@ -450,6 +456,7 @@ function fn_process_pay_order(){
 
     formObj.appendChild(i_delivery_address);
     formObj.appendChild(i_delivery_message);
+    formObj.appendChild(i_delivery_method);
     
     formObj.appendChild(i_pay_method);
     formObj.appendChild(i_card_com_name);
@@ -509,7 +516,7 @@ function fn_process_pay_order(){
 						<input  type="hidden" id="h_each_goods_price" name="h_each_goods_price" value="${item.goods_sales_price * item.order_goods_qty}" />
 					</td>
 				</tr>
-				<c:set var="final_total_order_price" value="${final_total_order_price+ item.goods_sales_price* item.order_goods_qty}" />
+				<c:set var="final_total_order_price" value="${final_total_order_price+ item.goods_sales_price* item.order_goods_qty }" />
 				<c:set var="total_order_price" value="${total_order_price+ item.goods_sales_price* item.order_goods_qty}" />
 				<c:set var="total_order_goods_qty" value="${total_order_goods_qty+item.order_goods_qty }" />
 			</c:forEach>
@@ -818,8 +825,8 @@ function fn_process_pay_order(){
 				      	
 				      </table>
 				      <br><br><br>
-				      <small style="opacity:0.6;">당신의 내일을 응원합니다.</small>
-						<h1>내일우유</h1>
+				      <small style="opacity:0.6;">최고의 빵을 제공합니다.</small>
+						<h1>BREAD IS YOU</h1>
 				      
 				    </div>
 				    

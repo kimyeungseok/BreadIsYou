@@ -179,6 +179,9 @@
 <html>
 <head>
 <style>
+td,tr{
+border : 1px solid black;
+}
 .no-uline {
 	text-decoration: none;
 }
@@ -212,8 +215,12 @@
 	}
 </script>
 <body>
+<div class="title_underline">
+			<h3><b>공지사항</b></h3>
+		</div>
+
 	<table align="center" border="1" width="80%">
-		<tr height="10" align="center" bgcolor="#2a4c34">
+		<tr height="10" align="center" bgcolor="#FDBA69">
 			<td><font color="white">글번호</font></td>
 			<!-- <td ><font color = "white" >작성자</font></td>  -->
 			<td><font color="white">제목</font></td>
@@ -237,7 +244,7 @@
 					<tr align="center">
 						<td width="5%">${articleNum.count}</td>
 						<%-- <td width="10%">${article.member_id }</td>  --%>
-						<td align='left' width="35%"><span
+						<td align='center' width="35%"><span
 							style="padding-right: 30px"></span> <c:choose>
 								<c:when test='${article.level > 1 }'>
 									<c:forEach begin="1" end="${article.level }" step="1">
@@ -319,16 +326,15 @@
 	</div>
 
 	<!-- <a  class="cls1"  href="#"><p class="cls2">글쓰기</p></a> -->
-	 <a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}',
+	 <%-- <a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}',
 			'${contextPath}/admin/notice/insertNoticeForm.do' , 
- 			'${contextPath}/member/loginForm.do' )"><p class="cls2"><font color = "black" >글쓰기</font></p></a>  
-
-	<%-- <c:if test="${isLogOn==true and memberInfo.member_id =='admin'}">
+ 			'${contextPath}/member/loginForm.do' )"><p class="cls2"><font color = "black" >글쓰기</font></p></a>   --%>
+<a  class="cls1">
+	<c:if test="${isLogOn==true and memberInfo.member_id =='admin'}">
 		<form action="${contextPath}/admin/notice/insertNoticeForm.do">
 			<br> <input type="submit" value="공지쓰기" class="btn btn-secondary">
 		</form>
-	</c:if> --%>
-
+	</c:if> </a>  
 </body>
 </html>
 

@@ -81,6 +81,10 @@
 				<td><input name="goods_sales_price" type="text" size="40" /></td>
 			</tr>
 			
+			<tr>
+				<td >제품 배송비</td>
+				<td><input name="goods_delivery_price" type="text" size="40" /></td>
+			</tr>
 			
 			<tr>
 				<td >제품 구매 포인트</td>
@@ -103,7 +107,7 @@
 				<select name="goods_status">
 				  <option value="bestgoods">인기상품</option>
 				  <option value="newgoods" selected>신상품</option>
-				  <option value="on_sale">할인상품</option>
+				  <option value="on_sale">사장님 추천 제품</option>
 				</select>
 				</td>
 			</tr>

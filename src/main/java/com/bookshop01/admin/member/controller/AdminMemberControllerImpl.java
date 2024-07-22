@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -129,19 +128,30 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		
 	}
 	
-	@RequestMapping(value="/deleteMember.do" ,method={RequestMethod.POST})
-	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		ModelAndView mav = new ModelAndView();
-		HashMap<String,String> memberMap=new HashMap<String,String>();
-		String member_id=request.getParameter("member_id");
-		String del_yn=request.getParameter("del_yn");
-		memberMap.put("del_yn", del_yn);
-		memberMap.put("member_id", member_id);
+	//멤버 삭제
+	@Override
+	@RequestMapping(value="/deleteMember.do" , method= {RequestMethod.POST})
+	public void deleteMember(@RequestParam("member_id") String member_id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		adminMemberService.modifyMemberInfo(memberMap);
-		mav.setViewName("redirect:/admin/member/adminMemberMain.do");
-		return mav;
+		adminMemberService.removeMember(member_id);
+		
 		
 	}
-		
+	
 }
+	
+//	@RequestMapping(value="/deleteMember.do" ,method={RequestMethod.POST})
+//	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		HashMap<String,String> memberMap=new HashMap<String,String>();
+//		String member_id=request.getParameter("member_id");
+//		String del_yn=request.getParameter("del_yn");
+//		memberMap.put("del_yn", del_yn);
+//		memberMap.put("member_id", member_id);
+//		
+//		adminMemberService.modifyMemberInfo(memberMap);
+//		mav.setViewName("redirect:/admin/member/adminMemberMain.do");
+//		return mav;
+//		
+//	}
+		

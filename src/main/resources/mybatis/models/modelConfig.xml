@@ -12,6 +12,10 @@
     <typeAlias type="com.bookshop01.mypage.vo.MyPageVO" alias="mypageVO" />
     <typeAlias type="com.bookshop01.admin.notice.vo.ArticleVO" alias="articleVO" />
     <typeAlias type="com.bookshop01.admin.notice.vo.ImageVO" alias="imageVO" />
+    <typeAlias type="com.bookshop01.board.qna.vo.QnaArticleVO" alias="QnaArticleVO" />
+    <typeAlias type="com.bookshop01.board.qna.vo.qnaImageVO" alias="qnaImageVO" />
+    <typeAlias type="com.bookshop01.board.review.vo.reviewArticleVO" alias="reviewArticleVO" />
+    <typeAlias type="com.bookshop01.board.review.vo.reviewImageVO" alias="reviewImageVO" />
     
   </typeAliases>
 </configuration>

@@ -21,17 +21,47 @@
 
 	<definition name="baseLayout2"
 		template="/WEB-INF/views/common/notice/layout2.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/common/notice/header2.jsp" />
-		<put-attribute name="side"
-			value="/WEB-INF/views/common/notice/side2.jsp" />
+		<!-- <put-attribute name="side"
+			value="/WEB-INF/views/common/notice/side2.jsp" /> -->
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer"
 			value="/WEB-INF/views/common/notice/footer2.jsp" />
+			<put-attribute name="quickMenu"
+			value="/WEB-INF/views/common/quickMenu.jsp" />
+			
 	</definition>
-	<!-- 레이아웃 정의 끝 -->
-
-
+	
+	<definition name="baseLayout3"
+		template="/WEB-INF/views/common/board/qna/layout3.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/board/qna/header3.jsp" />
+		<!-- <put-attribute name="side"
+			value="/WEB-INF/views/common/notice/side2.jsp" /> -->
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/board/qna/footer3.jsp" />
+			
+			
+	</definition>
+	
+	<definition name="baseLayout4"
+		template="/WEB-INF/views/common/board/review/layout4.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/board/review/header4.jsp" />
+		<!-- <put-attribute name="side"
+			value="/WEB-INF/views/common/notice/side2.jsp" /> -->
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/board/review/footer4.jsp" />
+			
+			
+	</definition>
+<!-- 레이아웃 정의 끝 -->
 
 
 	<!-- baseLayout1 끝 -->
@@ -225,6 +255,60 @@
 		/> </definition> -->
 
 	<!-- baseLayout2 끝 -->
+	
+	<!-- baseLayout3 시작 -->
+	
+	<definition name="/board/qna/qnaForm"
+		extends="baseLayout3">
+		<put-attribute name="title" value="글쓰기창" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/qna/qnaForm.jsp" />
+	</definition>
+
+	<definition name="/board/qna/viewQna"
+		extends="baseLayout3">
+		<put-attribute name="title" value="글상세창" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/qna/viewQna.jsp" />
+	</definition>
+
+	<definition name="/board/qna/listQna"
+		extends="baseLayout3">
+		<put-attribute name="title" value="글목록창" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/qna/listQna.jsp" />
+	</definition>
+	
+	<definition name="/board/qna/replyQnaForm" 
+		extends="baseLayout3">
+		<put-attribute name="title" value="답글쓰기창" />
+		<put-attribute name="body" 
+			value="/WEB-INF/views/board/qna/replyQnaForm.jsp" />
+	</definition>
+<!-- baseLayout3 끝 -->
+
+<!-- baseLayout4 시작 -->
+<definition name="/board/review/reviewForm"
+		extends="baseLayout4">
+		<put-attribute name="title" value="글쓰기창" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/review/reviewForm.jsp" />
+	</definition>
+
+<!-- 	<definition name="/board/review/viewReview"
+		extends="baseLayout4">
+		<put-attribute name="title" value="글상세창" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/review/viewReview.jsp" />
+	</definition> -->
+
+	<definition name="/board/review/listReview"
+		extends="baseLayout4">
+		<put-attribute name="title" value="글목록창" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/review/listReview.jsp" />
+	</definition>
+<!-- baseLayout4 끝 -->
 
 </tiles-definitions>
 

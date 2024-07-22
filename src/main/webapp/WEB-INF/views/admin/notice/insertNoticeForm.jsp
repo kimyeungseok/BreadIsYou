@@ -109,7 +109,7 @@
     <table border="0" align="center">
       <tr>
 					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${memberInfo.member_name }" readonly/> </td>
+					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${memberInfo.member_id }" readonly/> </td>
 			</tr>
 	     <tr>
 			   <td align="right">글제목: </td>

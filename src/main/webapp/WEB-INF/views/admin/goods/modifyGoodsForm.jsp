@@ -33,9 +33,7 @@ function fn_modify_goods(goods_id, attribute){
 	if(attribute=='goods_sort'){
 		value=frm_mod_goods.goods_sort.value;
 	}else if(attribute=='goods_title'){
-		value=frm_mod_goods.goods_title.value;
-	}else if(attribute=='goods_writer'){
-		value=frm_mod_goods.goods_writer.value;   
+		value=frm_mod_goods.goods_title.value;  
 	}else if(attribute=='goods_publisher'){
 		value=frm_mod_goods.goods_publisher.value;
 	}else if(attribute=='goods_price'){
@@ -46,26 +44,14 @@ function fn_modify_goods(goods_id, attribute){
 		value=frm_mod_goods.goods_point.value;
 	}else if(attribute=='goods_published_date'){
 		value=frm_mod_goods.goods_published_date.value;
-	}else if(attribute=='goods_page_total'){
-		value=frm_mod_goods.goods_page_total.value;
-	}else if(attribute=='goods_isbn'){
-		value=frm_mod_goods.goods_isbn.value;
 	}else if(attribute=='goods_delivery_price'){
 		value=frm_mod_goods.goods_delivery_price.value;
 	}else if(attribute=='goods_delivery_date'){
 		value=frm_mod_goods.goods_delivery_date.value;
 	}else if(attribute=='goods_status'){
 		value=frm_mod_goods.goods_status.value;
-	}else if(attribute=='goods_contents_order'){
-		value=frm_mod_goods.goods_contents_order.value;
-	}else if(attribute=='goods_writer_intro'){
-		value=frm_mod_goods.goods_writer_intro.value;
 	}else if(attribute=='goods_intro'){
 		value=frm_mod_goods.goods_intro.value;
-	}else if(attribute=='publisher_comment'){
-		value=frm_mod_goods.publisher_comment.value;
-	}else if(attribute=='recommendation'){
-		value=frm_mod_goods.recommendation.value;
 	}
 
 	$.ajax({
@@ -228,9 +214,9 @@ function fn_modify_goods(goods_id, attribute){
 	<!-- 내용 들어 가는 곳 -->
 	<DIV id="container">
 		<UL class="tabs" id="goods_detail_menu">
-			<li><A href="#tab1">상품정보</A></li>
-			<li><A href="#tab4">상품소개</A></li>
-			<li><A href="#tab7">상품이미지</A></li>
+			<li><A href="#tab1"><font color = "white">상품정보</font></A></li>
+			<li><A href="#tab4"><font color = "white">상품소개</font></A></li>
+			<li><A href="#tab7"><font color = "white">상품이미지</font></A></li>
 		</UL>
 		<DIV class="tab_container">
 			<DIV class="tab_content" id="tab1">
@@ -240,20 +226,29 @@ function fn_modify_goods(goods_id, attribute){
 				<td width=500>
 				  <select name="goods_sort">
 					<c:choose>
-				      <c:when test="${goods.goods_sort=='우유' }">
-						<option value="우유" selected>우유 </option>
-				  	    <option value="커피">커피 </option>
-				  	    <option value="발효유">발효유 </option>
+				      <c:when test="${goods.goods_sort=='빵' }">
+						<option value="빵" selected>빵 </option>
+				  	    <option value="케이크">케이크 </option>
+				  	    <option value="디저트">디저트 </option>
+				  	    <option value="잼">잼 </option>
 				  	  </c:when>
-				  	  <c:when test="${goods.goods_sort=='커피' }">
-						<option value="우유" >우유 </option>
-				  	    <option value="커피" selected>커피  </option>
-				  	    <option value="발효유">발효유 </option>
+				  	  <c:when test="${goods.goods_sort=='케이크' }">
+						<option value="빵" >빵 </option>
+				  	    <option value="케이크" selected>케이크  </option>
+				  	    <option value="디저트">디저트 </option>
+				  	    <option value="잼">잼 </option>
 				  	  </c:when>
-				  	  <c:when test="${goods.goods_sort=='발효유' }">
-						<option value="우유" >우유 </option>
-				  	    <option value="커피" >커피  </option>
-				  	    <option value="발효유" selected>발효유 </option>
+				  	  <c:when test="${goods.goods_sort=='디저트' }">
+						<option value="빵" >빵 </option>
+				  	    <option value="케이크" >케이크  </option>
+				  	    <option value="디저트" selected>디저트 </option>
+				  	    <option value="잼">잼 </option>
+				  	  </c:when>
+				  	   <c:when test="${goods.goods_sort=='잼' }">
+						<option value="빵" >빵 </option>
+						<option value="케이크" >케이크 </option>
+				  	    <option value="디저트" >디저트 </option>
+				  	    <option value="잼" selected>잼 </option>
 				  	  </c:when>
 				  	</c:choose>
 					</select>
@@ -337,7 +332,7 @@ function fn_modify_goods(goods_id, attribute){
 				  <option value="newgoods" >신상품</option>
 				  <option value="on_sale" selected >판매중</option>
 				  <option value="buy_out" >품절</option>
-				  <option value="out_of_print" >절판</option>
+				 
 				</select>
 				<input  type="hidden" name="h_goods_status" value="${goods.goods_status }"/>
 				</td>

@@ -41,9 +41,7 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
 		String action=(String)session.getAttribute("action");
-		//로그인 여부 체크
-		//이전에 로그인 상태인 경우는 주문과정 진행
-		//로그아웃 상태인 경우 로그인 화면으로 이동
+
 		if(isLogOn==null || isLogOn==false){
 			session.setAttribute("orderInfo", _orderVO);
 			session.setAttribute("action", "/order/orderEachGoods.do");
@@ -136,17 +134,18 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 			orderVO.setDelivery_address(receiverMap.get("delivery_address"));
 			orderVO.setDelivery_message(receiverMap.get("delivery_message"));
 			orderVO.setDelivery_method(receiverMap.get("delivery_method"));
-			orderVO.setGift_wrapping(receiverMap.get("gift_wrapping"));
+			
 			orderVO.setPay_method(receiverMap.get("pay_method"));
 			orderVO.setCard_com_name(receiverMap.get("card_com_name"));
 			orderVO.setCard_pay_month(receiverMap.get("card_pay_month"));
 			orderVO.setPay_orderer_hp_num(receiverMap.get("pay_orderer_hp_num"));	
 			orderVO.setOrderer_hp(orderer_hp);	
-			myOrderList.set(i, orderVO); //각 orderVO에 주문자 정보를 세팅한 후 다시 myOrderList에 저장한다.
+			myOrderList.set(i, orderVO); 
+			System.out.println(orderVO);
 		}//end for
 		
 	    orderService.addNewOrder(myOrderList);
-		mav.addObject("myOrderInfo",receiverMap);//OrderVO로 주문결과 페이지에  주문자 정보를 표시한다.
+		mav.addObject("myOrderInfo",receiverMap);
 		mav.addObject("myOrderList", myOrderList);
 		return mav;
 	}

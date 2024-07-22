@@ -50,7 +50,7 @@
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-	window.Kakao.init("da4bef609228b4a716f5e04f6cd08cbc");
+	window.Kakao.init("ae00942a708b33d695ff04a4ed9b20c6");
 	
 	function kakaoLogin() {
 		window.Kakao.Auth.login({

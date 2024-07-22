@@ -26,7 +26,7 @@
 		<result property="delivery_message" column="delivery_message" />
 		
 		<result property="delivery_method" column="delivery_method" />
-		<result property="gift_wrapping" column="gift_wrapping" />
+		
 		<result property="pay_method" column="pay_method" />
 		<result property="card_com_name" column="card_com_name" />
 		<result property="card_pay_month" column="card_pay_month" />

@@ -127,7 +127,7 @@ public class BoardControllerImpl  implements BoardController{
 		String viewName = (String)request.getAttribute("viewName");
 		session = request.getSession();
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberInfo");
 		
 		String member_id = null;
 		if(memberVO != null) {

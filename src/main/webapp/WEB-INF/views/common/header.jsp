@@ -149,12 +149,13 @@
 		            </li>
 		            
 		            <li class="nav-item">
-		                <a class="nav-link" href="${contextPath}/board/qna/listQna.do"><font color = "black" >질문과답변</font></a>
+		                <a class="nav-link" href="${contextPath}/board/qna/listQna.do"><font color = "black" >문의사항</font></a>
 		            </li>
+		           <%-- <li class="nav-item">
+		                <a class="nav-link" href="${contextPath}/board/review/listReview.do"><font color = "black" >리뷰</font></a>
+		            </li>  --%>
 		            
-		            <li class="nav-item">
-		                <a class="nav-link" href="${contextPath}/board/review/listReview.do"><font color = "black" >후기</font></a>
-		            </li>
+		            
 		            
 		            <c:choose>
 		            	<c:when test="${isLogOn==true and not empty memberInfo}">

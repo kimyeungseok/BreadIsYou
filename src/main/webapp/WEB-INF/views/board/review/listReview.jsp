@@ -5,10 +5,10 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<c:set var="reviewList" value="${reviewMap.reviewList}" />
-<c:set var="section" value="${reviewMap.section}" />
-<c:set var="pageNum" value="${reviewMap.pageNum}" />
-<c:set var="totalReview" value="${reviewMap.totalReview}" />
+<c:set var="articlesList" value="${articlesMap.articlesList}" />
+<c:set var="section" value="${articlesMap.section}" />
+<c:set var="pageNum" value="${articlesMap.pageNum}" />
+<c:set var="totArticles" value="${articlesMap.totalReview}" />
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -22,12 +22,12 @@
 
 <script>
 	/* 후기 삭제 */
-	function deleteReview(review_id) {
+	function deleteReview(articleNO) {
 		$.ajax({
 		    type : "post",
 		    async : true, //false인 경우 동기식으로 처리한다.
-		    url : "${contextPath}/board/review/removeReview.do",
-		    data: {review_id:review_id},
+		    url : "${contextPath}/board/review/reviewRemoveArticle.do",
+		    data: {articleNO:articleNO},
 		    success : function(data, textStatus) {
 		    	location.reload();
 		    	alert("후기를 삭제했습니다.");
@@ -67,13 +67,13 @@
 				<td width="10%"><b>작성자</b></td>
 				<td width="10%"><b>상품번호</b></td>
 				<td width="49%"><b>제목</b></td>
-				<td width="10%"><b>별점</b></td>
+				<!-- <td width="10%"><b>별점</b></td> -->
 				<td width="14%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>날짜</b></td>
 			</tr>
 			</thead>
 			
 			<c:choose>
-				<c:when test="${reviewList == null}">
+				<c:when test="${articlesList == null}">
 					<tr>
 						<td>
 							<p>
@@ -83,32 +83,32 @@
 					</tr>
 				</c:when>
 		
-				<c:when test="${reviewList != null}">
-					<c:forEach var="review" items="${reviewList}" varStatus="reviewNum" >
+				<c:when test="${articlesList != null}">
+					<c:forEach var="article" items="${articlesList}" varStatus="articleNum" >
 						<tr>
 							<td align="center">
-								${review.rnum}
+								${article.rnum}
 							</td>
 							<td align="center">
-								${review.member_id}
+								${article.member_id}
 							</td>
 							<td align="center">
-								${review.goods_id}
+								${article.goods_id}
 							</td>
 							<td align="center">
-								${review.content}
+								${article.content}
 							</td>
 							
-							<c:if test="${review.star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-							<c:if test="${review.star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-							<c:if test="${review.star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-							<c:if test="${review.star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-							<c:if test="${review.star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+							<%-- <c:if test="${article.star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+							<c:if test="${article.star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+							<c:if test="${article.star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+							<c:if test="${article.star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+							<c:if test="${article.star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if> --%>
 							
 							<td align="left">
-								${review.write_date}
-								<c:if test="${isLogOn == true and review.member_id == memberInfo.member_id || isLogOn == true and memberInfo.member_id == 'admin'}">
-									&nbsp;<input type="button" value="X" onClick="deleteReview('${review.review_id}')"> <!-- style="border:none;" -->
+								${article.writeDate}
+								<c:if test="${isLogOn == true and article.member_id == memberInfo.member_id || isLogOn == true and memberInfo.member_id == 'admin'}">
+									&nbsp;<input type="button" value="X" onClick="deleteReview('${article.articleNO}')"> <!-- style="border:none;" -->
 								</c:if>
 							</td>
 							

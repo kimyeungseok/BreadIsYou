@@ -34,11 +34,11 @@
 		<result property="joinDate" column="joinDate" />
 		<result property="del_yn" column="del_yn" />
 	</resultMap>
-<select id="listMember" resultMap="memberResult"   parameterType="java.util.HashMap"  >
+<select id="listMember" resultMap="memberResult" parameterType="java.util.HashMap"  >
 		  select * from (
 			    select rowNum as recNum,t.*
 			       from (
-			              select  *  from t_shoping_member 
+			              select  *  from t_shopping_member 
 			              where to_char(joinDate,'yyyy-mm-dd')  between #{beginDate} and #{endDate}
 			                <if test="search_type=='member_id'">
 			                  AND member_id=#{search_word}
@@ -52,23 +52,24 @@
 			              order by joinDate desc
 					    ) t
 				)							
-			where				
-		recNum between (#{chapter}-1)*100+ (#{pageNum}-1)*10+1 and (#{chapter}-1)*100+(#{pageNum})*10				        
+			where
+		recNum between (#{section}-1)*100+ (#{pageNum}-1)*10+1 and
+		(#{section}-1)*100+(#{pageNum})*10
 	</select>
 	
     <select id="memberDetail" resultMap="memberResult"   parameterType="String"  >
 	    <![CDATA[
-		    select * from t_shoping_member
+		    select * from t_shopping_member
             where member_id=#{member_id}
     	]]>
 	</select>	
 	
 
 	<update id="modifyMemberInfo" parameterType="java.util.HashMap">
-	   update t_shoping_member
+	   update t_shopping_member
 			   <set>
 			      <if test=" member_pw!='' and member_pw!=null">
-			        member_pw=#{member_pw},
+			        member_pw=#{member_pw },
 			      </if>
 			      <if test=" member_gender!='' and member_gender!=null">
 			         member_gender=#{member_gender},
@@ -133,35 +134,11 @@
 	</update>	
 	
 	
-	<!-- <select id="selectAllMemberList" resultMap="memResult">
-      <![CDATA[
-         select * from t_shopping_member order by joinDate desc	 	
-      ]]>
-	</select>
-    
-  <insert id="insertMember"  parameterType="memberVO">
-		<![CDATA[
-		 insert into t_shopping_member(member_id,member_pwd,member_name, email1)
-		 values(#{member_id}, #{member_pwd}, #{member_name}, #{email1})
-		]]>      
-	</insert>
+	<!-- 멤버삭제 -->
+	<delete id="deleteMember" parameterType="String">
+	  delete from T_SHOPPING_MEMBER
+	  where member_id=#{member_id}
+	</delete>
 	
-   
-   <update id="updateMember"  parameterType="memberVO">
-     <![CDATA[
-	     update t_shopping_member
-	     set member_pwd=#{member_pwd}, member_name=#{member_name}, email1=#{email1}
-	     where
-	     member_id=#{member_id}
-      ]]>      
-   </update> 
-     
-   <delete id="deleteMember"  parameterType="String">
-	<![CDATA[
-	   delete from  t_shopping_member
-	   where
-	   member_id=#{member_id}
-	]]>      
-  </delete> -->
+	
 </mapper>
-

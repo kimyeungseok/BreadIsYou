@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,7 +33,7 @@ import com.bookshop01.member.vo.MemberVO;
 @Controller("adminGoodsController")
 @RequestMapping(value="/admin/goods")
 public class AdminGoodsControllerImpl extends BaseController  implements AdminGoodsController{
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\DevWeb\\workspace_spring\\pro31\\src\\main\\webapp\\resources\\image\\upload";
 	@Autowired
 	private AdminGoodsService adminGoodsService;
 	
@@ -43,7 +44,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session=request.getSession();
 		session=request.getSession();
-		session.setAttribute("side_menu", "admin_mode"); //∏∂¿Ã∆‰¿Ã¡ˆ ªÁ¿ÃµÂ ∏ﬁ¥∫∑Œ º≥¡§«—¥Ÿ.
+		session.setAttribute("side_menu", "admin_mode");
 		
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 		String section = dateMap.get("section");
@@ -129,7 +130,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 				}
 			}
 			message= "<script>";
-			message += " alert('ªıªÛ«∞¿ª √ﬂ∞°«ﬂΩ¿¥œ¥Ÿ.');";
+			message += " alert('ÏÉÅÌíàÏù¥ Îì±Î°ù ÎêòÏóàÏäµÎãàÎã§.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 		}catch(Exception e) {
@@ -142,7 +143,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			}
 			
 			message= "<script>";
-			message += " alert('ø¿∑˘∞° πﬂª˝«ﬂΩ¿¥œ¥Ÿ. ¥ŸΩ√ Ω√µµ«ÿ ¡÷ººø‰');";
+			message += " alert('ÏÉÅÌíàÏù¥ Îì±Î°ù ÎêòÏóàÏäµÎãàÎã§.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 			e.printStackTrace();
@@ -150,6 +151,18 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
+	
+	@Override
+	@RequestMapping(value="/removeGoods.do" ,method={RequestMethod.POST})
+	public void  removeGoods(@RequestParam("goods_id") int goods_id, HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		
+		adminGoodsService.removeGoods(goods_id);
+		
+	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="/modifyGoodsForm.do" ,method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView modifyGoodsForm(@RequestParam("goods_id") int goods_id,

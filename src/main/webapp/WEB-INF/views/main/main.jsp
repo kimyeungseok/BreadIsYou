@@ -71,7 +71,7 @@
 		<a href="#discount">
 			<div class="btn" id="main_btn_menu">
 			<font color = "black" >
-				할인제품
+				사장님 추천 제품
 				</font>
 			</div>
 		</a>
@@ -89,7 +89,7 @@
 	<div class="main_goods_div">
 		<div class="main_goods">
 			<c:set var="goods_count" value="0" />
-			<c:forEach var="item" items="${goodsMap.bestseller }">
+			<c:forEach var="item" items="${goodsMap.bestgoods }">
 				<c:set var="goods_count" value="${goods_count+1 }" />
 				<div class="goods">
 			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
@@ -157,7 +157,7 @@
 	<div class="main_goods_div">
 		<div class="main_goods">
 			<c:set var="goods_count" value="0" />
-			<c:forEach var="item" items="${goodsMap.newbook }">
+			<c:forEach var="item" items="${goodsMap.newgoods }">
 				<c:set var="goods_count" value="${goods_count+1 }" />
 				<div class="goods">
 					
@@ -185,14 +185,14 @@
 	
 	<div class="main-title-div" id="discount">
 		<div class="main-title">
-			<h3>할인제품</h3>
+			<h3>사장님 추천 제품</h3>
 		</div>
 	</div>
 	
 	<div class="main_goods_div">
 		<div class="main_goods">
 			<c:set var="goods_count" value="0" />
-			<c:forEach var="item" items="${goodsMap.steadyseller }">
+			<c:forEach var="item" items="${goodsMap.on_sale }">
 				<c:set var="goods_count" value="${goods_count+1 }" />
 				<div class="goods">
 					
@@ -226,70 +226,74 @@
 	<div class="main_goods_div">
 		<div class="main_goods">
 			<c:set var="goods_count" value="0" />
-			<c:forEach var="item" items="${goodsMap.bestgoods}">
-			
+			<c:forEach var="item" items="${goodsMap.bestgoods }">
 				<c:set var="goods_count" value="${goods_count+1 }" />
-		
-					<div class="goods">
-						
-					<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}">
-						<img src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}" style="width:200px; height:200px;">
-					</a>
-					
-					<div class="title"><small>${item.goods_publisher}</small><b><br>${item.goods_title}</b></div>
-					<div class="price">
-						<fmt:formatNumber value="${item.goods_price}" type="number" var="goods_price" />
-						<b>${goods_price}원</b><br>
-						<c:if test="${item.goods_avg_star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						후기(${item.goods_review_count})
-					</div>
-				</div>
+				<div class="goods">
+			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
+			<img class="link"  src="${contextPath}/resources/image/1px.gif"> 
+			</a> 
+				<img width="200" height="200" 
+				     src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
+
+			<div class="title">${item.goods_title }</div>
+			<div class="price">
+		  	   <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
+		          ${goods_price}원
+			</div>
+		</div>
+	   <c:if test="${goods_count==15   }">
+         <div class="goods">
+           <font size=20> <a href="#">더보기</a></font>
+         </div>
+         </c:if>
 			</c:forEach>
+			
+			
+			<c:set var="goods_count" value="0" />
 			<c:forEach var="item" items="${goodsMap.newgoods }">
 				<c:set var="goods_count" value="${goods_count+1 }" />
 				<div class="goods">
 					
 					<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-						<img src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}" style="width:200px; height:200px;">
-					</a>
-					<div class="title"><small>${item.goods_publisher}</small><b><br>${item.goods_title}</b></div>
-					<div class="price">
-						<fmt:formatNumber value="${item.goods_price}" type="number" var="goods_price" />
-						<b>${goods_price}원</b><br>
-						<c:if test="${item.goods_avg_star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						후기(${item.goods_review_count})
-					</div>
-				</div>
+					<img class="link"  src="${contextPath}/resources/image/1px.gif"> 
+	      </a>
+		 <img width="200" height="200" 
+				src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
+		<div class="title">${item.goods_title }</div>
+		<div class="price">
+		    <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
+		       ${goods_price}원
+		  </div>
+	</div>
+	 <c:if test="${goods_count==15   }">
+     <div class="goods">
+       <font size=20> <a href="#">more</a></font>
+     </div>
+         </c:if>
 			</c:forEach>
+			
+			
+			<c:set var="goods_count" value="0" />
 			<c:forEach var="item" items="${goodsMap.on_sale }">
 				<c:set var="goods_count" value="${goods_count+1 }" />
 				<div class="goods">
 					
 					<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-						<img src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}" style="width:200px; height:200px;">
-					</a>
-					
-					<div class="title"><small>${item.goods_publisher}</small><b><br>${item.goods_title}</b></div>
-					<div class="price">
-						<fmt:formatNumber value="${item.goods_sales_price}" type="number" var="goods_price" />
-						<b>${item.goods_sales_price}원</b><br>
-						<c:if test="${item.goods_avg_star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						<c:if test="${item.goods_avg_star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-						후기(${item.goods_review_count})
-					</div>
-				</div>
-			</c:forEach>
+						 <img class="link"  src="${contextPath}/resources/image/1px.gif"> 
+	      </a>
+		 <img src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}" style="width:200px; height:200px;">
+		<div class="title">${item.goods_title }</div>
+		<div class="price">
+		    <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
+		       ${goods_price}원
+		  </div>
+	</div>
+	 <c:if test="${goods_count==15   }">
+     <div class="goods">
+       <font size=20> <a href="#">more</a></font>
+     </div>
+   </c:if>
+	</c:forEach>
 		</div>
 	</div>
 	

@@ -23,7 +23,7 @@ public class CartServiceImpl  implements CartService{
 	public Map<String ,List> myCartList(CartVO cartVO) throws Exception{
 		Map<String,List> cartMap=new HashMap<String,List>();
 		List<CartVO> myCartList=cartDAO.selectCartList(cartVO);
-		if(myCartList.size()==0){ //카트에 저장된 상품이없는 경우
+		if(myCartList.size()==0){
 			return null;
 		}
 		List<GoodsVO> myGoodsList=cartDAO.selectGoodsList(myCartList);

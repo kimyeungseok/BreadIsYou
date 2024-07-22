@@ -41,20 +41,20 @@
 							<label class="form-label"><span>제품이름</span></label>
 							<input type="text" class="form-control" value="${goodsInfo.goods_title}" readonly/>
 						</div>
-						<div class="mb-3">
+						<%-- <div class="mb-3">
 							<label class="form-label"><span>별점</span></label>
 							<br><input type="radio" name="star" value="5" checked />&nbsp;<img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg">
 							<br><br><input type="radio" name="star" value="4"/>&nbsp;<img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg">
 							<br><br><input type="radio" name="star" value="3"/>&nbsp;<img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg">
 							<br><br><input type="radio" name="star" value="2"/>&nbsp;<img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg">
 							<br><br><input type="radio" name="star" value="1"/>&nbsp;<img src="${contextPath}/resources/image/star1.jpg">
-						</div>
+						</div> --%>
 						<div class="mb-3">
 							<label class="form-label"><span>글내용</span></label>
 							<textarea class="form-control" name="content"></textarea>
 						</div>
 						
-						<input type=submit value="답글반영하기" class="btn btn-secondary btn-sm" />
+						<input type=submit value="후기쓰기" class="btn btn-secondary btn-sm" />
 						<input type=button value="취소"onClick="backToList(this.form)" class="btn btn-secondary btn-sm" />
 								
 					</form>

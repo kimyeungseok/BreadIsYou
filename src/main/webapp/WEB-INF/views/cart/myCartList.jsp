@@ -206,7 +206,7 @@ function fn_order_all_cart_goods(){
 	  formObj.appendChild(i_cartList);
 	  document.body.appendChild(formObj); 
 	  formObj.method = 'POST';
-	  formObj.action = '${contextPath}/cart/checkRemove.do';
+	  formObj.action = '${contextPath}/cart/removeCartGoods.do';
 	  formObj.submit();    
 	}
 	

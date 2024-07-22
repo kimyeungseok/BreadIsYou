@@ -34,7 +34,7 @@ function search_member(search_period){
     formObj.appendChild(i_endDate);
     document.body.appendChild(formObj); 
     formObj.method="get";
-    formObj.action="/naeilmilk/admin/member/adminMemberMain.do";
+    formObj.action="/pro31/admin/member/adminMemberMain.do";
     formObj.submit();
 }
 
@@ -52,7 +52,7 @@ function fn_member_detail(order_id){
     formObj.appendChild(i_order_id);
     document.body.appendChild(formObj); 
     formObj.method="post";
-    formObj.action="/naeilmilk/admin/member/memberDetail.do";
+    formObj.action="/pro31/admin/member/memberDetail.do";
     formObj.submit();
 	
 }
@@ -97,7 +97,7 @@ function fn_detail_search(){
     formObj.appendChild(i_search_word);
     document.body.appendChild(formObj); 
     formObj.method="post";
-    formObj.action="/naeilmilk/admin/member/memberDetail.do";
+    formObj.action="/pro31/admin/member/memberDetail.do";
     formObj.submit();
 	
 }
@@ -111,13 +111,13 @@ function fn_detail_search(){
 	
 <table class="table table-striped table-hover" style="width:1200px">
 		<tbody align=center >
-			<tr align=center bgcolor="#00BFFE">
-				<td><span><b>회원아이디</b></span></td>
-				<td><span><b>회원이름</b></span></td>
-				<td><span><b>휴대폰번호</b></span></td>
-				<td><span><b>주소</b></span></td>
-				<td><span><b>가입일</b></span></td>
-				<td><span><b>탈퇴여부</b></span></td>
+			<tr align=center bgcolor="#814725">
+				<td><span><font color = "white"><b>회원아이디</b></font></span></td>
+				<td><span><font color = "white"><b>회원이름</b></font></span></td>
+				<td><span><font color = "white"><b>휴대폰번호</b></font></span></td>
+				<td><span><font color = "white"><b>주소</b></font></span></td>
+				<td><span><font color = "white"><b>가입일</b></font></span></td>
+				<td><span><font color = "white"><b>탈퇴여부</b></font></span></td>
 			</tr>
    <c:choose>
      <c:when test="${empty member_list}">			
@@ -199,3 +199,4 @@ function fn_detail_search(){
 </body>
 </html>
 
+ 

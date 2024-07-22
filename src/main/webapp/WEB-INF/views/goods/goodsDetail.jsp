@@ -7,7 +7,9 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="goods"  value="${goodsMap.goodsVO}"  />
 <c:set var="imageList"  value="${goodsMap.imageList }"  />
-<c:set var="reviewList" value="${reviewList }" />
+ <c:set var="reviewList" value="${reviewList }" /> 
+
+
  <%
      //치환 변수 선언합니다.
       pageContext.setAttribute("crcn" , "\n"); //Ajax로 변경 시 개행 문자 
@@ -172,7 +174,7 @@ function add_cart(goods_id) {
 	}
 	
 	//QNA 로그인 여부
-	function fn_qna_Form(isLogOn,url,goods_id) {
+/* 	function fn_qna_Form(isLogOn,url,goods_id) {
 		if (isLogOn != '' && isLogOn != 'false'){
 			var form = document.createElement("form");
 			form.setAttribute("method", "post");
@@ -189,15 +191,15 @@ function add_cart(goods_id) {
 			alert("로그인 후 글쓰기가 가능합니다.");
 			location.href = "${contextPath}/member/loginForm.do?action=/board/qna/qnaForm.do&goods_id="+goods_id;
 		}
-	}
+	} */
 	
 	 /* 리뷰삭제 */
-	 function deleteReview(review_id){
+	 function deleteReview(articleNO){
 		$.ajax({
 		    type : "post",
 		    async : true, //false인 경우 동기식으로 처리한다.
-		    url : "${contextPath}/board/review/removeReview.do",
-		    data: {review_id:review_id},
+		    url : "${contextPath}/board/review/reviewRemoveArticle.do",
+		    data: {articleNO:articleNO},
 		    success : function(data, textStatus) {
 		    	location.reload();
 		    	alert("리뷰를 삭제했습니다!!");
@@ -214,7 +216,7 @@ function add_cart(goods_id) {
 	}
 	 
 	/* QNA 삭제 */
-	function deleteQna(qna_id){
+	/* function deleteQna(qna_id){
 	   	$.ajax({
 	 		type : "post",
 	 		async : true, //false인 경우 동기식으로 처리한다.
@@ -234,7 +236,7 @@ function add_cart(goods_id) {
 		    			
 	   		}
 	   	}); //end ajax	
-	}
+	} */
 	 
 	
 	
@@ -330,13 +332,20 @@ function add_cart(goods_id) {
 	
 		<ul class="tabs" id="goods_detail_menu">
 			<li><a href="#tab1"><span><b><font color = "white" >상세정보</font></b></span></a></li>
-			<li><a href="#tab2"><span><b><font color = "white" >후기</font>&nbsp;(<span id="review_count"></span>)</b></span></a></li>
-			<li><a href="#tab3"><span><b><font color = "white" >질문과답변</font>&nbsp;(<span id="qna_count"></span>)</b></span></a></li>
+			<li><a href="#tab2"><span><b><font color = "white" >후기</font></b></span></a></li>
+			<li><a href="#tab3"><span><b><font color = "white" >문의사항</font></b></span></a></li>
 			<li><a href="#tab4"><span><b><font color = "white" >반품/교환정보</font></b></span></a></li>
 		</ul>
 		
 		<div class="tab_container">
-		
+		<div class="tab_content" id="tab1">
+				
+				<p>${fn:replace(goods.goods_intro,crcn,br)}</p>
+				<c:forEach var="image" items="${imageList }">
+					<img 
+						src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}">
+				</c:forEach>
+			</div>
 			<div class="tab_content" id="tab1">
 				<c:forEach var="image" items="${imageList }">
 					<img src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}">
@@ -348,7 +357,7 @@ function add_cart(goods_id) {
   				<tr height="10" align="center" style="background:#2a4c34">
      				 <td width="7%"><b>번호</b></td>
     				 <td width="59%"><b>내용</b></td>
-    				 <td width="10%"><b>별점</b></td>
+    				<!--  <td width="10%"><b>별점</b></td> -->
     				 <td width="10%"><b>작성자</b></td>              
      				 <td width="14%" align="left">&nbsp;&nbsp;<b>작성일</b></td>
   				</tr>
@@ -369,16 +378,16 @@ function add_cart(goods_id) {
 							 	<tr align="center">
 									<td>${reviewNum.count}</td>
 									<td>${review.content}</td>
-									<c:if test="${review.star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-									<c:if test="${review.star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-									<c:if test="${review.star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-									<c:if test="${review.star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
-									<c:if test="${review.star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+									<%-- <c:if test="${article.star == 5}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+									<c:if test="${article.star == 4}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+									<c:if test="${article.star == 3}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+									<c:if test="${article.star == 2}"><td><img src="${contextPath}/resources/image/star1.jpg"><img src="${contextPath}/resources/image/star1.jpg"></td></c:if>
+									<c:if test="${article.star == 1}"><td><img src="${contextPath}/resources/image/star1.jpg"></td></c:if> --%>
 									<td>${review.member_id}</td>
 									<td align="left">
-										${review.write_date}
+										${review.writeDate}
 										<c:if test="${isLogOn == true and review.member_id == memberInfo.member_id || isLogOn == true and memberInfo.member_id == 'admin'}">
-											&nbsp;<input type=button value="X" onClick="deleteReview('${review.review_id}')" />
+											&nbsp;<input type=button value="X" onClick="deleteReview('${review.articleNO}')" />
 										</c:if>
 									</td>
 										
@@ -400,10 +409,10 @@ function add_cart(goods_id) {
 		
 			  // 리뷰글 총 갯수를 표시할 span 요소에 데이터 바인딩
 			  //showReviewCount(${fn:length(reviewList)});
-			</script>
+			</script> 
 			
 			<!-- QNA 구역 -->
-			<div class="tab_content" id="tab3">
+			<%-- <div class="tab_content" id="tab3">
 				
 				<table class="table table-striped table-hover">
   				<tr height="10" align="center" style="background:#2a4c34">
@@ -414,7 +423,7 @@ function add_cart(goods_id) {
   				</tr>
 			
 					<c:choose>
-						<c:when test="${qnaList == null}">
+						<c:when test="${articlesList == null}">
 							<tr height="10">
 				     			<td colspan="4">
 					         		<p align="center">
@@ -424,20 +433,20 @@ function add_cart(goods_id) {
 			      			</tr>
 			  			</c:when>
 					
-						<c:when test="${qnaList != null }">
-							<c:forEach var="qna" items="${qnaList }" varStatus="qnaNum">
+						<c:when test="${articlesList != null }">
+							<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 							 	<tr align="center">
-									<td>${qnaNum.count}</td>
+									<td>${articleNum.count}</td>
 									<td>
-										<a href="${contextPath}/board/qna/viewQna.do?qna_id=${qna.qna_id}">
-					    					${qna.title}
+										<a href="${contextPath}/board/qna/viewQna.do?qna_id=${article.member_id}">
+					    					${article.title}
 										</a>
 									 </td>
-									<td>${qna.member_id}</td>
+									<td>${article.member_id}</td>
 									<td align="left">
-										${qna.write_date}
-										<c:if test="${isLogOn == true and qna.member_id == memberInfo.member_id || isLogOn == true and memberInfo.member_id == 'admin'}">
-											&nbsp;<input type=button value="X" onClick="deleteQna('${qna.qna_id}')" />
+										${article.writeDate}
+										<c:if test="${isLogOn == true and article.member_id == memberInfo.member_id || isLogOn == true and memberInfo.member_id == 'admin'}">
+											&nbsp;<input type=button value="X" onClick="deleteQna('${article.member_id}')" />
 										</c:if>
 									</td>
 									
@@ -450,7 +459,7 @@ function add_cart(goods_id) {
 				<input type=button class="btn btn-secondary btn-sm" value="질문과 답변 작성" onClick="fn_qna_Form('${isLogOn}', '${contextPath}/board/qna/qnaForm.do', '${goods.goods_id}')"   />
 			</div>
 				
-			<script>
+			 <script>
   				// qna글 총 갯수를 출력하는 함수
 	  			function showReviewCount(count) {
 	    		var reviewCount = document.getElementById("qna_count");
@@ -461,7 +470,7 @@ function add_cart(goods_id) {
 	  			//showReviewCount(${fn:length(qnaList)});
 			</script>	
 				
-			</div>
+			</div> --%>
 			
 			<div class="tab_content" id="tab4">
 				<table class="table">

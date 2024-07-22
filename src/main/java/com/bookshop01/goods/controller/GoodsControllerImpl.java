@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bookshop01.board.review.service.reviewService;
 import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.service.GoodsService;
 import com.bookshop01.goods.vo.GoodsVO;
@@ -27,17 +28,36 @@ import net.sf.json.JSONObject;
 public class GoodsControllerImpl extends BaseController   implements GoodsController {
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private reviewService reviewService;
 	
-	@RequestMapping(value="/goodsDetail.do" ,method = RequestMethod.GET)
-	public ModelAndView goodsDetail(@RequestParam("goods_id") String goods_id,
-			                       HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/goodsDetail.do", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView goodsDetail(@RequestParam(value="goods_id", required=false) String goods_id, HttpServletRequest request, HttpSession session) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
-		HttpSession session=request.getSession();
-		Map goodsMap=goodsService.goodsDetail(goods_id);
+		Map goodsMap = null;
+	    
+	    // goods_id 값이 없을 경우 세션에서 조회
+	    if (goods_id == null) {
+	        goods_id = (String)session.getAttribute("goods_id");
+	    }
+	    
+	    if (goods_id != null) {
+	        goodsMap = goodsService.goodsDetail(goods_id);
+	    }
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("goodsMap", goodsMap);
+		
+		if (goodsMap != null) {
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id,goodsVO,session);
+		//리뷰글을 갖고오는 메서드
+		session.setAttribute("goodsInfo", goodsVO);
+		List reviewList = reviewService.listReview(goods_id);
+				
+        
+        mav.addObject("reviewList", reviewList);
+		}
 		return mav;
 	}
 	
