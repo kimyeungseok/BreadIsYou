@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board.review">
+	<resultMap id="articlesResult" type="reviewArticleVO">
+		<result property="articleNO" column="articleNO" />
+		<result property="content" column="content" />
+		<result property="writeDate" column="writeDate" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="member_id" column="member_id" />
+		<result property="goods_id" column="goods_id" />
+	</resultMap>
+	
+	<resultMap id="imgResult" type="reviewImageVO">
+		<result property="imageFileNO" column="imageFileNO" />
+		<result property="articleNO" column="articleNO" />
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
+	
+	<select id="selectAllArticlesList" parameterType="java.util.Map"
+		resultMap="articlesResult">
+    <![CDATA[
+  SELECT *
+				FROM (
+				  SELECT ROWNUM AS rnum, articleNO,  member_id, goods_id, content, writeDate
+				  FROM (
+				    SELECT articleNO,  member_id, goods_id, content,  writeDate
+				    FROM review_board
+				    ORDER BY writeDate DESC
+				  )
+				)
+				WHERE rnum BETWEEN ((#{section}-1)*15 + #{pageNum}*15 - 14) AND ((#{section}-1)*15 + #{pageNum}*15)
+                               
+	]]>
+	</select>
+
+	<select id="selectTotArticles" resultType="int">
+		<![CDATA[  
+			select count(articleNO) from review_board
+		 ]]>
+	</select>
+	
+	<select id="selectReviewList" resultMap="articlesResult"  parameterType="String" >
+	    <![CDATA[
+			select * from review_board
+            where goods_id = #{goods_id}
+            order by writeDate desc
+		]]>
+	</select>
+
+	<!--다중 이미지 새글 추가 SQL문 -->
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+    <![CDATA[
+      insert into review_board(articleNO, member_id,goods_id, content)
+      values(
+               #{articleNO},
+      		   #{member_id}, 
+      		   #{goods_id},
+      		   #{content})
+    ]]>
+	</insert>
+
+	<!-- <select id="selectNewGroupNO" resultType="int"> 
+	   <![CDATA[  
+			select nvl(max(groupNO), 0)+1 as maxGroupNO from review_board
+		 ]]>
+	</select> -->
+
+
+
+
+	<!--다중 이미지 답글 추가 SQL문 -->
+<!-- 	<insert id="insertReplyArticle" parameterType="java.util.Map">
+    <![CDATA[
+     insert into qna_board(groupNO, articleNO, parentNO, member_id, title, content, imageFileName)
+      values(#{groupNO},
+               #{articleNO},
+      		   #{parentNO}, 
+      		   #{member_id}, 
+      		   #{title}, 
+      		   #{content}, 
+      		   null)
+    ]]>
+	</insert> -->
+
+
+	<insert id="insertNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT * FROM DUAL">
+			INTO review_imageFile(imageFileNO, imageFileName,
+			articleNO, regDate)
+			VALUES (#{item.imageFileNO},
+			#{item.imageFileName},
+			#{item.articleNO},
+			sysdate)
+		</foreach>
+	</insert>
+
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+			SELECT  nvl(max(articleNO), 0) + 1 from review_board		
+		]]>
+	</select>
+
+	<select id="selectArticle" resultType="reviewArticleVO"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from review_board
+      where articleNO = #{articleNO}		
+    ]]>
+	</select>
+
+	<!-- 다중 파일 수정하기 -->
+	<update id="updateArticle" parameterType="java.util.Map">
+		update review_board
+		set
+		title=#{title}
+		,content=#{content}
+		where articleNO=#{articleNO}
+	</update>
+
+
+
+	<update id="updateImageFile" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.imageFileName != null ">
+					update review_imageFile
+					set imageFileName =
+					#{item.imageFileName}
+					where
+					articleNO=#{item.articleNO}
+					and
+					imageFileNO = #{item.imageFileNO}
+				</when>
+				<otherwise>
+
+				</otherwise>
+			</choose>
+		</foreach>
+	</update>
+
+	<delete id="deleteArticle" parameterType="int">
+    <![CDATA[
+      delete from review_board
+      where articleNO = #{articleNO}
+    ]]>
+	</delete>
+
+
+	<select id="selectNewImageFileNO" resultType="int">
+    <![CDATA[
+      SELECT  nvl(max(imageFileNO),0) from review_imageFile		
+    ]]>
+	</select>
+
+
+	<select id="selectImageFileList" resultMap="imgResult"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from review_imageFile
+      where articleNO=#{articleNO}
+      order by imageFileNO	
+    ]]>
+	</select>
+
+
+	<delete id="deleteModImage" parameterType="reviewImageVO">
+	    <![CDATA[
+	      delete from review_imageFile
+	      where articleNO = #{articleNO}
+	      and imageFileNO = #{imageFileNO}
+	    ]]>
+	</delete>
+
+	<insert id="insertModNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT * FROM DUAL">
+			INTO review_imageFile(imageFileNO, imageFileName,
+			articleNO, regDate)
+			VALUES (#{item.imageFileNO},
+			#{item.imageFileName},
+			#{item.articleNO},
+			sysdate)
+		</foreach>
+	</insert>
+
+<!-- 	<update id="updateViewCounts" parameterType="int">
+	    <![CDATA[
+	      update qna_board
+		  set viewCounts = viewCounts+1
+		  where
+		     articleNO=#{articleNO}
+	    ]]>
+	</update> -->
+
+
+
+
+
+</mapper>

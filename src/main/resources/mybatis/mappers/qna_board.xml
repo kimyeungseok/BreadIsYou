@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board.qna">
+	<resultMap id="articlesResult" type="QnaArticleVO">
+		<result property="level" column="lvl" />
+		<result property="articleNO" column="articleNO" />
+		<result property="parentNO" column="parentNO" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="writeDate" column="writeDate" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="viewCounts" column="viewCounts" />
+		<result property="newArticle" column="newArticle" />
+		<result property="member_id" column="member_id" />
+	</resultMap>
+
+	<resultMap id="imgResult" type="qnaImageVO">
+		<result property="imageFileNO" column="imageFileNO" />
+		<result property="articleNO" column="articleNO" />
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
+
+	<select id="selectAllArticlesList" parameterType="java.util.Map"
+		resultMap="articlesResult">
+    <![CDATA[
+   SELECT * FROM (
+				select groupNO,
+                        LVL,
+                        articleNO,
+                        parentNO,
+                        title,
+                        member_id,
+                        newArticle,
+                        writeDate,
+                        viewCounts
+                            from (
+                                select 
+                                    groupNO, 
+                                    LEVEL as LVL,
+                                    articleNO,
+                                    parentNO,
+                                    title,
+                                    member_id,
+                                    decode(round(sysdate-writeDate),0,'true','false') newArticle,
+                                    writeDate,
+                                    viewCounts                                    
+                                    from (
+			                                select * from qna_board
+											where groupNO in(
+											 	  select groupNO
+											 	    from (
+													select  recNum, 
+												  groupNO
+											from(   
+											select rowNum  as recNum, groupNO
+											  from (
+											  select distinct groupNO from qna_board
+										 order by groupNO desc
+									  )
+									 )
+								 where recNum between(#{section}-1)*100+(#{pageNum}-1)*10+1 and (#{section}-1)*100+#{pageNum}*10           
+								)     	 
+									)
+                                                               
+                                    )
+                                   START WITH  parentNO=0
+                                   CONNECT BY PRIOR articleNO = parentNO
+                                   ORDER SIBLINGS BY articleNO DESC)
+                               )
+                               
+	]]>
+	</select>
+
+	<select id="selectTotArticles" resultType="int">
+		<![CDATA[  
+			select count(articleNO) from qna_board
+		 ]]>
+	</select>
+
+	<!--다중 이미지 새글 추가 SQL문 -->
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+    <![CDATA[
+      insert into qna_board(groupNO, articleNO, parentNO, member_id, title, content, imageFileName)
+      values(#{groupNO},
+               #{articleNO},
+      		   #{parentNO}, 
+      		   #{member_id}, 
+      		   #{title}, 
+      		   #{content}, 
+      		   null)
+    ]]>
+	</insert>
+
+	<select id="selectNewGroupNO" resultType="int"> 
+	   <![CDATA[  
+			select nvl(max(groupNO), 0)+1 as maxGroupNO from qna_board
+		 ]]>
+	</select>
+
+
+
+
+	<!--다중 이미지 답글 추가 SQL문 -->
+	<insert id="insertReplyArticle" parameterType="java.util.Map">
+    <![CDATA[
+     insert into qna_board(groupNO, articleNO, parentNO, member_id, title, content, imageFileName)
+      values(#{groupNO},
+               #{articleNO},
+      		   #{parentNO}, 
+      		   #{member_id}, 
+      		   #{title}, 
+      		   #{content}, 
+      		   null)
+    ]]>
+	</insert>
+
+
+	<insert id="insertNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT * FROM DUAL">
+			INTO qna_imageFile(imageFileNO, imageFileName,
+			articleNO, regDate)
+			VALUES (#{item.imageFileNO},
+			#{item.imageFileName},
+			#{item.articleNO},
+			sysdate)
+		</foreach>
+	</insert>
+
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+			SELECT  nvl(max(articleNO), 0) + 1 from qna_board		
+		]]>
+	</select>
+
+	<select id="selectArticle" resultType="QnaArticleVO"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from qna_board
+      where articleNO = #{articleNO}		
+    ]]>
+	</select>
+
+	<!-- 다중 파일 수정하기 -->
+	<update id="updateArticle" parameterType="java.util.Map">
+		update qna_board
+		set
+		title=#{title}
+		,content=#{content}
+		where articleNO=#{articleNO}
+	</update>
+
+
+
+	<update id="updateImageFile" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.imageFileName != null ">
+					update qna_imageFile
+					set imageFileName =
+					#{item.imageFileName}
+					where
+					articleNO=#{item.articleNO}
+					and
+					imageFileNO = #{item.imageFileNO}
+				</when>
+				<otherwise>
+
+				</otherwise>
+			</choose>
+		</foreach>
+	</update>
+
+	<delete id="deleteArticle" parameterType="int">
+    <![CDATA[
+      delete from qna_board
+      where articleNO in (
+         SELECT articleNO FROM  qna_board
+         START WITH articleNO = #{articleNO}
+         CONNECT BY PRIOR  articleNO = parentNO )
+    ]]>
+	</delete>
+
+
+	<select id="selectNewImageFileNO" resultType="int">
+    <![CDATA[
+      SELECT  nvl(max(imageFileNO),0) from qna_imageFile		
+    ]]>
+	</select>
+
+
+	<select id="selectImageFileList" resultMap="imgResult"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from qna_imageFile
+      where articleNO=#{articleNO}
+      order by imageFileNO	
+    ]]>
+	</select>
+
+
+	<delete id="deleteModImage" parameterType="qnaImageVO">
+	    <![CDATA[
+	      delete from qna_imageFile
+	      where articleNO = #{articleNO}
+	      and imageFileNO = #{imageFileNO}
+	    ]]>
+	</delete>
+
+	<insert id="insertModNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT * FROM DUAL">
+			INTO qna_imageFile(imageFileNO, imageFileName,
+			articleNO, regDate)
+			VALUES (#{item.imageFileNO},
+			#{item.imageFileName},
+			#{item.articleNO},
+			sysdate)
+		</foreach>
+	</insert>
+
+	<update id="updateViewCounts" parameterType="int">
+	    <![CDATA[
+	      update qna_board
+		  set viewCounts = viewCounts+1
+		  where
+		     articleNO=#{articleNO}
+	    ]]>
+	</update>
+
+
+
+
+
+</mapper>
