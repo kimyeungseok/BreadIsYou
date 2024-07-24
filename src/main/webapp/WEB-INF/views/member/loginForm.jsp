@@ -50,8 +50,8 @@
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-	window.Kakao.init("ae00942a708b33d695ff04a4ed9b20c6");
-	
+	window.Kakao.init("c1412a562ee5b4372a0fac09e5effb57");
+	console.log( Kakao.isInitialized() );
 	function kakaoLogin() {
 		window.Kakao.Auth.login({
 			scope:'account_email',

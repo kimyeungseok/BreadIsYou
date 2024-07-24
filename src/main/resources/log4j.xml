@@ -21,7 +21,7 @@
 	
 	
 	<!-- Application Loggers -->
-	<logger name="com.bookshop01">
+	<logger name="project">
 		<level value="debug" />
 	</logger>
 	

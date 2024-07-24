@@ -121,13 +121,13 @@
 			 $.ajax({
 		       type:"post",
 		       async:false,  
-		       url:"http://localhost:8090/pro31/board/qna/removeModImage.do",
+		       url:"http://localhost:8090/breadisyou/board/qna/removeModImage.do",
 		       dataType:"text",
 		       data: {imageFileNO : _imageFileNO,  articleNO : _articleNO, imageFileName : _imageFileName},
 		       success:function (result, textStatus){
 		          if(result == 'success'){
 		       	    alert("이미지를 삭제했습니다.");
-		     	 	location.href="http://localhost:8090/pro31/board/qna/viewQna.do?removeCompleted=true&articleNO=" + _articleNO;
+		     	 	location.href="http://localhost:8090/breadisyou/board/qna/viewQna.do?removeCompleted=true&articleNO=" + _articleNO;
 		  
 		  			$('#tr_'+rowNum).remove();
 		 			$('#tr_sub'+rowNum).remove();

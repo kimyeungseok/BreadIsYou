@@ -4,18 +4,18 @@
 
 <configuration>
   <typeAliases>
-    <typeAlias type="com.bookshop01.goods.vo.GoodsVO" alias="goodsVO" />
-    <typeAlias type="com.bookshop01.goods.vo.ImageFileVO" alias="imageFileVO" />
-    <typeAlias type="com.bookshop01.member.vo.MemberVO" alias="memberVO" />
-    <typeAlias type="com.bookshop01.cart.vo.CartVO" alias="cartVO" />
-    <typeAlias type="com.bookshop01.order.vo.OrderVO" alias="orderVO" />
-    <typeAlias type="com.bookshop01.mypage.vo.MyPageVO" alias="mypageVO" />
-    <typeAlias type="com.bookshop01.admin.notice.vo.ArticleVO" alias="articleVO" />
-    <typeAlias type="com.bookshop01.admin.notice.vo.ImageVO" alias="imageVO" />
-    <typeAlias type="com.bookshop01.board.qna.vo.QnaArticleVO" alias="QnaArticleVO" />
-    <typeAlias type="com.bookshop01.board.qna.vo.qnaImageVO" alias="qnaImageVO" />
-    <typeAlias type="com.bookshop01.board.review.vo.reviewArticleVO" alias="reviewArticleVO" />
-    <typeAlias type="com.bookshop01.board.review.vo.reviewImageVO" alias="reviewImageVO" />
+    <typeAlias type="project.goods.vo.GoodsVO" alias="goodsVO" />
+    <typeAlias type="project.goods.vo.ImageFileVO" alias="imageFileVO" />
+    <typeAlias type="project.member.vo.MemberVO" alias="memberVO" />
+    <typeAlias type="project.cart.vo.CartVO" alias="cartVO" />
+    <typeAlias type="project.order.vo.OrderVO" alias="orderVO" />
+    <typeAlias type="project.mypage.vo.MyPageVO" alias="mypageVO" />
+    <typeAlias type="project.admin.notice.vo.ArticleVO" alias="articleVO" />
+    <typeAlias type="project.admin.notice.vo.ImageVO" alias="imageVO" />
+    <typeAlias type="project.board.qna.vo.QnaArticleVO" alias="QnaArticleVO" />
+    <typeAlias type="project.board.qna.vo.qnaImageVO" alias="qnaImageVO" />
+    <typeAlias type="project.board.review.vo.reviewArticleVO" alias="reviewArticleVO" />
+    <typeAlias type="project.board.review.vo.reviewImageVO" alias="reviewImageVO" />
     
   </typeAliases>
 </configuration>
