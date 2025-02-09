@@ -1,5 +1,6 @@
-# 🛒 BreadShop
-
+ <div align= "center">
+🛒 BreadShop
+ </div>
 빵이쥬 프로젝트
 캡쳐본
 기술스택
